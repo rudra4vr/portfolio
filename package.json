@@ -1,0 +1,22 @@
+{
+  "name": "graphic-designer-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "aos": "^2.3.4",
+    "gsap": "^3.12.5",
+    "lightbox2": "^2.11.4",
+    "particles.js": "^2.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss-preset-env": "^10.1.6",
+    "sass": "^1.70.0",
+    "vite": "^5.1.0"
+  }
+}
