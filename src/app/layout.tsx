@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Layout } from "../components/Layout";
+import { ThemeProvider } from "styled-components";
+import { theme } from "../styles/theme";
+import { GlobalStyles } from "../styles/globalStyles";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,20 +21,17 @@ export const metadata: Metadata = {
   description: "Portfolio of Rudra Raval - Graphic Designer, Animator, and Video Editor",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Layout>
-          {children}
-        </Layout>
-      </body>
-    </html>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Layout>
+        {children}
+      </Layout>
+    </ThemeProvider>
   );
 }

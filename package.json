@@ -8,10 +8,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/node": "^22.15.3",
+    "@types/react": "^19.1.2",
+    "@types/styled-components": "^5.1.34",
     "aos": "^2.3.4",
     "gsap": "^3.12.5",
     "lightbox2": "^2.11.4",
-    "particles.js": "^2.0.0"
+    "particles.js": "^2.0.0",
+    "styled-components": "^6.1.17"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",

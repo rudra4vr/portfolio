@@ -19,12 +19,48 @@ export const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
 
   body {
     font-family: 'Inter', sans-serif;
-    background-color: ${({ theme }) => theme.colors.background};
+    background: linear-gradient(
+      -45deg,
+      ${({ theme }) => theme.colors.primary}25,
+      ${({ theme }) => theme.colors.secondary}25,
+      ${({ theme }) => theme.colors.accent}25,
+      ${({ theme }) => theme.colors.success}25
+    );
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     color: ${({ theme }) => theme.colors.text};
     line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle at 50% 50%,
+      ${({ theme }) => theme.colors.background} 0%,
+      ${({ theme }) => theme.colors.background}99 100%
+    );
+    z-index: -1;
+  }
+
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {
