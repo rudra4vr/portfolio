@@ -1,243 +1,206 @@
-"use client";
+'use client'
 
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
+import { FiX, FiPlay, FiImage } from 'react-icons/fi'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const PortfolioSection = styled.section`
-  background: ${({ theme }) => theme.colors.background};
-  padding: ${({ theme }) => theme.spacing.section} 0;
-`;
+gsap.registerPlugin(ScrollTrigger)
 
-const PortfolioContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 ${({ theme }) => theme.spacing.container};
-`;
+type Project = {
+  id: number
+  title: string
+  category: 'video' | 'logo' | 'animation'
+  thumbnail: string
+  videoUrl?: string
+  description: string
+  isPortrait?: boolean
+}
 
-const SectionTitle = styled(motion.h2)`
-  font-size: ${({ theme }) => theme.fontSizes.large};
-  color: ${({ theme }) => theme.colors.primary};
-  text-align: center;
-  margin-bottom: ${({ theme }) => theme.spacing.margin};
-  position: relative;
-  display: inline-block;
-  left: 50%;
-  transform: translateX(-50%);
+const projects: Project[] = [
+  {
+    id: 1,
+    title: 'BARISTA Cafe Promo',
+    category: 'video',
+    thumbnail: '/portfolio/barista-thumbnail.jpeg',
+    videoUrl: '/BARISTA Cafe Promo Video.mp4',
+    description: 'A promotional video showcasing the art of coffee making and the unique atmosphere of BARISTA Cafe.',
+    isPortrait: true
+  },
+  {
+    id: 2,
+    title: 'CAFE 27 Experience',
+    category: 'video',
+    thumbnail: '/portfolio/cafe27-thumbnail.jpeg',
+    videoUrl: '/CAFE 27.mp4',
+    description: 'An immersive video capturing the essence and experience of CAFE 27.',
+    isPortrait: true
+  },
+  {
+    id: 3,
+    title: 'Logo Design Collection',
+    category: 'logo',
+    thumbnail: '/placeholder-logo.jpg',
+    description: 'A collection of minimalist logo designs for various clients.',
+  },
+  {
+    id: 4,
+    title: '3D Product Animation',
+    category: 'animation',
+    thumbnail: '/placeholder-animation.jpg',
+    description: 'An engaging 3D product animation highlighting key features.',
+  },
+]
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background: ${({ theme }) => theme.colors.gradient};
-    border-radius: ${({ theme }) => theme.borderRadius.small};
-  }
-`;
+const Portfolio = () => {
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'video' | 'logo' | 'animation'>('all')
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
 
-const FilterButtons = styled(motion.div)`
-  display: flex;
-  justify-content: center;
-  gap: ${({ theme }) => theme.spacing.padding};
-  margin-bottom: ${({ theme }) => theme.spacing.margin};
-  flex-wrap: wrap;
+  const filteredProjects = projects.filter(
+    (project) => selectedCategory === 'all' || project.category === selectedCategory
+  )
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    gap: ${({ theme }) => theme.spacing.padding};
-  }
-`;
-
-const FilterButton = styled(motion.button)<{ active: boolean }>`
-  padding: 0.75rem 1.5rem;
-  border-radius: ${({ theme }) => theme.borderRadius.medium};
-  font-size: ${({ theme }) => theme.fontSizes.body};
-  font-weight: 500;
-  background: ${({ theme, active }) => active ? theme.colors.gradient : theme.colors.light};
-  color: ${({ theme, active }) => active ? 'white' : theme.colors.primary};
-  box-shadow: ${({ theme, active }) => active ? theme.shadows.medium : 'none'};
-  transition: all ${({ theme }) => theme.transitions.default};
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: ${({ theme }) => theme.shadows.medium};
-  }
-`;
-
-const PortfolioGrid = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: ${({ theme }) => theme.spacing.margin};
-  margin-top: ${({ theme }) => theme.spacing.margin};
-`;
-
-const PortfolioItem = styled(motion.div)`
-  position: relative;
-  border-radius: ${({ theme }) => theme.borderRadius.large};
-  overflow: hidden;
-  aspect-ratio: 16/9;
-  box-shadow: ${({ theme }) => theme.shadows.medium};
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: ${({ theme }) => theme.colors.gradient};
-    opacity: 0.8;
-    transition: opacity ${({ theme }) => theme.transitions.default};
-  }
-
-  &:hover::before {
-    opacity: 0.6;
-  }
-`;
-
-const ItemContent = styled(motion.div)`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: ${({ theme }) => theme.spacing.padding};
-  color: white;
-  z-index: 1;
-`;
-
-const ItemTitle = styled(motion.h3)`
-  font-size: ${({ theme }) => theme.fontSizes.subtitle};
-  margin-bottom: 0.5rem;
-`;
-
-const ItemCategory = styled(motion.span)`
-  font-size: ${({ theme }) => theme.fontSizes.small};
-  opacity: 0.8;
-`;
-
-const Portfolio: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const filters = ['All', 'Motion Design', 'Video Editing', 'Animation', 'Visual Effects'];
-
-  const portfolioItems = [
-    {
-      id: 1,
-      title: 'Brand Identity Animation',
-      category: 'Motion Design',
-      image: '/images/portfolio1.jpg',
-    },
-    {
-      id: 2,
-      title: 'Product Launch Video',
-      category: 'Video Editing',
-      image: '/images/portfolio2.jpg',
-    },
-    {
-      id: 3,
-      title: 'Character Animation',
-      category: 'Animation',
-      image: '/images/portfolio3.jpg',
-    },
-    {
-      id: 4,
-      title: 'Visual Effects Showreel',
-      category: 'Visual Effects',
-      image: '/images/portfolio4.jpg',
-    },
-    {
-      id: 5,
-      title: 'Motion Graphics Package',
-      category: 'Motion Design',
-      image: '/images/portfolio5.jpg',
-    },
-    {
-      id: 6,
-      title: 'Corporate Video',
-      category: 'Video Editing',
-      image: '/images/portfolio6.jpg',
-    },
-  ];
-
-  const filteredItems = activeFilter === 'All'
-    ? portfolioItems
-    : portfolioItems.filter(item => item.category === activeFilter);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.6, -0.05, 0.01, 0.99],
-      },
-    },
-  };
+  useEffect(() => {
+    if (sectionRef.current) {
+      gsap.from('.project-item', {
+        opacity: 0,
+        y: 30,
+        duration: 0.6,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top center',
+          end: 'bottom center',
+        },
+      })
+    }
+  }, [selectedCategory])
 
   return (
-    <PortfolioSection>
-      <PortfolioContainer>
-        <SectionTitle
-          variants={itemVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+    <section id="portfolio" ref={sectionRef} className="py-20 bg-white dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
         >
-          Portfolio
-        </SectionTitle>
-        <FilterButtons
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {filters.map((filter) => (
-            <FilterButton
-              key={filter}
-              active={activeFilter === filter}
-              onClick={() => setActiveFilter(filter)}
-              variants={itemVariants}
-            >
-              {filter}
-            </FilterButton>
-          ))}
-        </FilterButtons>
-        <PortfolioGrid
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          {filteredItems.map((item) => (
-            <PortfolioItem
-              key={item.id}
-              variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              <ItemContent>
-                <ItemTitle>{item.title}</ItemTitle>
-                <ItemCategory>{item.category}</ItemCategory>
-              </ItemContent>
-            </PortfolioItem>
-          ))}
-        </PortfolioGrid>
-      </PortfolioContainer>
-    </PortfolioSection>
-  );
-};
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">My Portfolio</h2>
+          <div className="w-20 h-1 bg-purple-500 mx-auto mb-8" />
+          
+          {/* Category Filter */}
+          <div className="flex justify-center space-x-4 mb-8">
+            {['all', 'video', 'logo', 'animation'].map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category as any)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  selectedCategory === category
+                    ? 'bg-purple-500 text-white'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                }`}
+              >
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </button>
+            ))}
+          </div>
+        </motion.div>
 
-export default Portfolio; 
+        {/* Project Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProjects.map((project) => (
+            <motion.div
+              key={project.id}
+              className="project-item group relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
+              onClick={() => setSelectedProject(project)}
+              whileHover={{ y: -5 }}
+            >
+              <div className="aspect-video relative">
+                <Image
+                  src={project.thumbnail}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={project.id <= 2}
+                />
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  {project.videoUrl ? (
+                    <FiPlay className="w-12 h-12 text-white" />
+                  ) : (
+                    <FiImage className="w-12 h-12 text-white" />
+                  )}
+                </div>
+              </div>
+              <div className="p-4 bg-white dark:bg-gray-800">
+                <h3 className="font-bold text-lg mb-2">{project.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  {project.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Project Modal */}
+        <AnimatePresence>
+          {selectedProject && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80"
+              onClick={() => setSelectedProject(null)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className={`relative ${selectedProject.isPortrait ? 'max-w-md' : 'max-w-4xl'} w-full bg-white dark:bg-gray-800 rounded-lg overflow-hidden`}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                  onClick={() => setSelectedProject(null)}
+                >
+                  <FiX className="w-6 h-6" />
+                </button>
+                
+                <div className={`relative ${selectedProject.isPortrait ? 'aspect-[9/16]' : 'aspect-video'}`}>
+                  {selectedProject.videoUrl ? (
+                    <video
+                      src={selectedProject.videoUrl}
+                      controls
+                      className="w-full h-full object-contain"
+                      poster={selectedProject.thumbnail}
+                    />
+                  ) : (
+                    <Image
+                      src={selectedProject.thumbnail}
+                      alt={selectedProject.title}
+                      fill
+                      className="object-contain"
+                    />
+                  )}
+                </div>
+                
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold mb-2">{selectedProject.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {selectedProject.description}
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </section>
+  )
+}
+
+export default Portfolio 

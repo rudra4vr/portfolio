@@ -1,37 +1,33 @@
-# Creative Portfolio Website
+# Creative Designer Portfolio
 
-A modern, responsive portfolio website for graphic designers built with pure HTML, CSS, and JavaScript. Features include animated sections, interactive elements, and a clean, creative design.
+A modern, responsive portfolio website built with Next.js, Tailwind CSS, and GSAP/Framer Motion animations. Perfect for showcasing graphic design, video editing, and animation work.
 
 ## Features
 
-- Modern, creative design with dark theme
-- Responsive layout for all screen sizes
-- Animated sections with AOS and GSAP
-- Interactive particle background
-- Portfolio filtering system
-- Image gallery with lightbox
-- Testimonials slider
-- Contact form with validation
-- Smooth scrolling
-- Mobile-friendly navigation
+- 🎨 Modern, minimalist design
+- 📱 Fully responsive layout
+- ✨ Smooth animations and transitions
+- 🎥 Video and image portfolio with filtering
+- 📝 Contact form with validation
+- 🌙 Dark mode support
+- 🔍 SEO optimized
+- ⚡ Fast performance
 
-## Technologies Used
+## Tech Stack
 
-- HTML5
-- CSS3 (with CSS Variables)
-- JavaScript (ES6+)
-- GSAP for animations
-- AOS (Animate On Scroll)
-- Particles.js for background effects
-- Lightbox2 for image gallery
-- Font Awesome for icons
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- GSAP
+- Framer Motion
+- React Icons
 
-## Setup Instructions
+## Getting Started
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/creative-portfolio.git
-cd creative-portfolio
+git clone <repository-url>
+cd portfolio
 ```
 
 2. Install dependencies:
@@ -39,72 +35,78 @@ cd creative-portfolio
 npm install
 ```
 
-3. Start the development server:
+3. Run the development server:
 ```bash
 npm run dev
 ```
 
-4. Build for production:
-```bash
-npm run build
-```
-
-## Project Structure
-
-```
-creative-portfolio/
-├── public/
-│   ├── images/
-│   │   └── videos/
-│   └── styles/
-│       └── main.css
-├── index.html
-├── package.json
-├── vite.config.js
-└── README.md
-```
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Customization
 
-### Colors
-Edit the CSS variables in `src/styles/main.css`:
-```css
-:root {
-    --primary-color: #FF3D00;
-    --secondary-color: #00BCD4;
-    --background-color: #0A0A0A;
-    /* ... */
-}
+### Content
+
+1. **Profile Information**
+   - Update the profile picture in `public/placeholder-profile.jpg`
+   - Modify the bio and skills in `src/components/About.tsx`
+
+2. **Portfolio Items**
+   - Add your projects in `src/components/Portfolio.tsx`
+   - Replace placeholder images in the `public` directory
+   - Update video URLs and descriptions
+
+3. **Contact Information**
+   - Update social media links in `src/components/Footer.tsx`
+   - Modify contact email and location
+
+4. **Colors and Styling**
+   - Customize the color scheme in `tailwind.config.js`
+   - Modify animations in individual components
+
+### Adding New Projects
+
+1. Add your project media to the `public` directory
+2. Update the `projects` array in `src/components/Portfolio.tsx`:
+
+```typescript
+const projects: Project[] = [
+  {
+    id: 1,
+    title: 'Your Project Title',
+    category: 'video', // or 'logo' or 'animation'
+    thumbnail: '/your-thumbnail.jpg',
+    videoUrl: 'https://your-video-url.mp4', // optional
+    description: 'Project description',
+  },
+  // Add more projects...
+]
 ```
 
-### Content
-Update the content in `index.html`:
-- Replace placeholder text
-- Add your own images to the `public/images` directory
-- Update social media links
-- Add your own portfolio items
+## Deployment
 
-### Animations
-Customize animations in `src/js/main.js`:
-- Adjust GSAP animation parameters
-- Modify AOS settings
-- Update particle.js configuration
+The site is ready to be deployed to Vercel or Netlify:
 
-## Browser Support
+### Vercel
+```bash
+npm run build
+vercel
+```
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+### Netlify
+```bash
+npm run build
+netlify deploy
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Credits
+## Acknowledgments
 
-- Font Awesome for icons
-- Vincent Garreau for particles.js
-- Michał Sajnóg for AOS
-- GreenSock for GSAP
-- Lokesh Dhakar for Lightbox2
+- Icons by [React Icons](https://react-icons.github.io/react-icons/)
+- Animations powered by [GSAP](https://greensock.com/gsap/) and [Framer Motion](https://www.framer.com/motion/)

@@ -1,37 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import { Layout } from "../components/Layout";
-import { ThemeProvider } from "styled-components";
-import { theme } from "../styles/theme";
-import { GlobalStyles } from "../styles/globalStyles";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Rudra Raval - Creative Portfolio",
-  description: "Portfolio of Rudra Raval - Graphic Designer, Animator, and Video Editor",
+  title: "Design Portfolio | Creative Works",
+  description: "Professional portfolio showcasing graphic design, video editing, and animation work",
 };
 
-interface RootLayoutProps {
-  children: React.ReactNode;
-}
-
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Layout>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${inter.className} bg-white dark:bg-gray-900 text-gray-900 dark:text-white`}>
         {children}
-      </Layout>
-    </ThemeProvider>
+      </body>
+    </html>
   );
 }

@@ -1,215 +1,110 @@
-"use client";
+'use client'
 
-import React from 'react';
-import styled from 'styled-components';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
+import gsap from 'gsap'
 
-const HeroSection = styled(motion.section)`
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  background: ${({ theme }) => theme.colors.background};
-  padding: ${({ theme }) => theme.spacing.section} 0;
-`;
+const Hero = () => {
+  const backgroundRef = useRef<HTMLDivElement>(null)
 
-const HeroContent = styled(motion.div)`
-  position: relative;
-  z-index: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: ${({ theme }) => theme.spacing.container};
-  text-align: center;
-`;
+  useEffect(() => {
+    if (backgroundRef.current) {
+      // Create a timeline for color transitions
+      const tl = gsap.timeline({
+        repeat: -1,
+        defaults: { duration: 5, ease: 'power1.inOut' }
+      })
 
-const HeroTitle = styled(motion.h1)`
-  font-size: ${({ theme }) => theme.fontSizes.xlarge};
-  color: ${({ theme }) => theme.colors.primary};
-  margin-bottom: ${({ theme }) => theme.spacing.margin};
-  line-height: 1.1;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  background: ${({ theme }) => theme.colors.gradient};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 200%;
-  animation: gradient 8s ease infinite;
+      // Define gradient combinations that match the theme
+      const gradients = [
+        'linear-gradient(135deg, #8b5cf6, #ec4899)', // Purple to Pink
+        'linear-gradient(135deg, #7c3aed, #db2777)', // Darker Purple to Darker Pink
+        'linear-gradient(135deg, #6d28d9, #be185d)', // Deep Purple to Deep Pink
+        'linear-gradient(135deg, #5b21b6, #9d174d)', // Rich Purple to Rich Pink
+        'linear-gradient(135deg, #4c1d95, #831843)'  // Royal Purple to Royal Pink
+      ]
 
-  @keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    font-size: ${({ theme }) => theme.fontSizes.large};
-  }
-`;
-
-const HeroSubtitle = styled(motion.p)`
-  font-size: ${({ theme }) => theme.fontSizes.subtitle};
-  color: ${({ theme }) => theme.colors.text};
-  max-width: 800px;
-  margin: 0 auto ${({ theme }) => theme.spacing.margin};
-  line-height: 1.6;
-  opacity: 0.8;
-`;
-
-const HeroButton = styled(motion.button)`
-  background: ${({ theme }) => theme.colors.gradient};
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: ${({ theme }) => theme.borderRadius.medium};
-  font-size: ${({ theme }) => theme.fontSizes.body};
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: ${({ theme }) => theme.colors.gradient2};
-    z-index: -1;
-    transition: transform 0.3s ease;
-    transform: scaleX(0);
-    transform-origin: right;
-  }
-
-  &:hover::before {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: ${({ theme }) => theme.shadows.glow};
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-`;
-
-const BackgroundPattern = styled(motion.div)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, ${({ theme }) => theme.colors.light} 0%, ${({ theme }) => theme.colors.background} 100%);
-  opacity: 0.3;
-  z-index: 0;
-`;
-
-const FloatingElements = styled(motion.div)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-`;
-
-const FloatingElement = styled(motion.div)`
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: ${({ theme }) => theme.colors.primary};
-  border-radius: ${({ theme }) => theme.borderRadius.round};
-  opacity: 0.2;
-`;
-
-const Hero: React.FC = () => {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 100]);
-  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
-
-  const floatingElements = Array.from({ length: 10 }).map((_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    scale: Math.random() * 0.5 + 0.5,
-    duration: Math.random() * 2 + 2,
-  }));
+      // Add each gradient transition to the timeline
+      gradients.forEach((gradient) => {
+        tl.to(backgroundRef.current, {
+          background: gradient,
+          duration: 5
+        })
+      })
+    }
+  }, [])
 
   return (
-    <HeroSection
-      style={{ y }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-      <BackgroundPattern
-        animate={{
-          scale: [1, 1.1, 1],
-          rotate: [0, 5, 0],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-      <FloatingElements>
-        {floatingElements.map((element) => (
-          <FloatingElement
-            key={element.id}
-            initial={{
-              x: `${element.x}%`,
-              y: `${element.y}%`,
-              scale: element.scale,
-            }}
+    <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Animated Background */}
+      <div
+        ref={backgroundRef}
+        className="absolute inset-0 transition-all duration-1000 ease-in-out bg-gradient-to-br from-purple-500 via-pink-500 to-red-500"
+      >
+        <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 text-center px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.h1 
+            className="text-4xl md:text-7xl font-bold text-white mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Creative Designer
+          </motion.h1>
+          <motion.p 
+            className="text-xl md:text-2xl text-white/90 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            Crafting Visual Stories Through Design & Animation
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <a
+              href="#portfolio"
+              className="inline-block bg-white/90 backdrop-blur-sm text-gray-900 px-8 py-4 rounded-full font-medium hover:bg-white transition-colors text-lg"
+            >
+              View My Work
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+      >
+        <div className="w-6 h-10 border-2 border-white/70 rounded-full flex justify-center">
+          <motion.div
             animate={{
-              y: [`${element.y}%`, `${element.y + 20}%`, `${element.y}%`],
-              x: [`${element.x}%`, `${element.x + 10}%`, `${element.x}%`],
+              y: [0, 12, 0],
             }}
             transition={{
-              duration: element.duration,
+              duration: 1.5,
               repeat: Infinity,
-              ease: "easeInOut",
+              repeatType: 'loop',
             }}
+            className="w-1 h-2 bg-white/70 rounded-full mt-2"
           />
-        ))}
-      </FloatingElements>
-      <HeroContent>
-        <HeroTitle
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
-        >
-          Creative Motion Designer & Video Editor
-        </HeroTitle>
-        <HeroSubtitle
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.6, -0.05, 0.01, 0.99] }}
-        >
-          Transforming ideas into captivating visual experiences through motion design and video editing.
-        </HeroSubtitle>
-        <HeroButton
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.4, ease: [0.6, -0.05, 0.01, 0.99] }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          View My Work
-        </HeroButton>
-      </HeroContent>
-    </HeroSection>
-  );
-};
+        </div>
+      </motion.div>
+    </section>
+  )
+}
 
-export default Hero; 
+export default Hero 
