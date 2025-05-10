@@ -2,19 +2,24 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiSend, FiCheck } from 'react-icons/fi'
+import { FiSend } from 'react-icons/fi'
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // FormSubmit will handle the submission automatically
-    // The form will redirect to the specified URL after submission
-    // No need for additional JavaScript handling
+    try {
+      // FormSubmit will handle the submission automatically
+      // The form will redirect to the specified URL after submission
+      // No need for additional JavaScript handling
+    } catch (error) {
+      console.error('Error submitting form:', error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -30,7 +35,7 @@ const Contact = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Get in Touch</h2>
           <div className="w-20 h-1 bg-purple-500 mx-auto mb-8" />
           <p className="text-gray-600 dark:text-gray-300">
-            Have a project in mind? Let's discuss how we can work together.
+            Have a project in mind? Let&apos;s discuss how we can work together.
           </p>
         </motion.div>
 
@@ -118,11 +123,6 @@ const Contact = () => {
                 transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                 className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
               />
-            ) : isSubmitted ? (
-              <>
-                <FiCheck className="w-5 h-5 mr-2" />
-                Message Sent!
-              </>
             ) : (
               <>
                 <FiSend className="w-5 h-5 mr-2" />

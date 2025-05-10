@@ -94,10 +94,10 @@ const Portfolio = () => {
           
           {/* Category Filter */}
           <div className="flex justify-center space-x-4 mb-8">
-            {['all', 'video', 'logo', 'animation'].map((category) => (
+            {(['all', 'video', 'logo', 'animation'] as const).map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category as any)}
+                onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   selectedCategory === category
                     ? 'bg-purple-500 text-white'
