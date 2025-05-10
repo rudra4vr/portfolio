@@ -6,7 +6,7 @@ const nextConfig = {
   },
   trailingSlash: true,
   experimental: {
-    optimizeCss: true,
+    optimizeCss: false,
   },
 }
 
