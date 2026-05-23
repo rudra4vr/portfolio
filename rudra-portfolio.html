@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rudra Pranav Raval — Designer & Entrepreneur</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --cream:#faf8f4;
+  --purple:#7c3aed;
+  --purple-light:#ede9fe;
+  --orange:#ea580c;
+  --orange-light:#fff7ed;
+  --teal:#0d9488;
+  --teal-light:#f0fdfa;
+  --pink:#db2777;
+  --pink-light:#fdf2f8;
+  --yellow:#d97706;
+  --yellow-light:#fffbeb;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden}
+
+/* ── CURSOR ── */
+.cursor{width:20px;height:20px;border:2px solid var(--purple);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:transform 0.1s,border-color 0.3s;transform:translate(-50%,-50%)}
+.cursor-dot{width:6px;height:6px;background:var(--purple);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:background 0.3s}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;letter-spacing:-0.5px;color:white;text-decoration:none}
+.nav-logo span{color:var(--purple)}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s;font-weight:400}
+.nav-links a:hover{color:white}
+.nav-cta{background:var(--purple);color:white;padding:9px 20px;border-radius:50px;font-size:13px;font-weight:500;text-decoration:none;transition:background 0.2s,transform 0.15s}
+.nav-cta:hover{background:#6d28d9;transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 48px 80px;position:relative;overflow:hidden}
+
+.hero-bg{position:absolute;inset:0;z-index:0}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.15;animation:float 8s ease-in-out infinite}
+.blob-1{width:600px;height:600px;background:var(--purple);top:-200px;right:-100px;animation-delay:0s}
+.blob-2{width:400px;height:400px;background:var(--orange);bottom:-100px;left:-100px;animation-delay:3s}
+.blob-3{width:300px;height:300px;background:var(--teal);top:50%;left:40%;animation-delay:6s}
+
+@keyframes float{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-30px) scale(1.05)}
+}
+
+.hero-content{position:relative;z-index:1;max-width:1160px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);border-radius:50px;padding:6px 16px;font-size:12px;font-weight:500;color:#a78bfa;margin-bottom:24px}
+.hero-tag-dot{width:6px;height:6px;background:#a78bfa;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+h1.hero-title{font-family:'Playfair Display',serif;font-size:clamp(42px,5.5vw,72px);font-weight:900;line-height:1.04;letter-spacing:-2px;margin-bottom:24px}
+h1.hero-title .line-1{display:block;color:white}
+h1.hero-title .line-2{display:block;color:white}
+h1.hero-title .line-3{display:block;font-style:italic;background:linear-gradient(135deg,var(--purple),var(--pink),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.hero-desc{font-size:16px;line-height:1.75;color:rgba(255,255,255,0.55);font-weight:300;max-width:460px;margin-bottom:36px}
+
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+.btn-primary{display:inline-block;padding:14px 28px;background:linear-gradient(135deg,var(--purple),var(--pink));color:white;border-radius:50px;font-size:14px;font-weight:500;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(124,58,237,0.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,58,237,0.4)}
+.btn-secondary{display:inline-block;padding:14px 28px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:white;border-radius:50px;font-size:14px;font-weight:500;text-decoration:none;transition:background 0.2s,transform 0.2s}
+.btn-secondary:hover{background:rgba(255,255,255,0.1);transform:translateY(-2px)}
+
+.hero-social{display:flex;gap:12px;align-items:center}
+.hero-social-label{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.1em;text-transform:uppercase}
+.social-icon{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:14px;transition:background 0.2s,transform 0.2s;color:white}
+.social-icon:hover{background:rgba(124,58,237,0.3);border-color:var(--purple);transform:translateY(-2px)}
+
+/* HERO RIGHT — CARD STACK */
+.hero-right{position:relative;height:480px}
+
+.floating-card{position:absolute;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:20px;backdrop-filter:blur(10px)}
+
+.card-main{width:280px;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;background:rgba(124,58,237,0.12);border-color:rgba(124,58,237,0.3)}
+.card-main .card-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:white;margin-bottom:14px}
+.card-main .card-name{font-size:16px;font-weight:700;color:white;margin-bottom:2px}
+.card-main .card-role{font-size:12px;color:rgba(255,255,255,0.45)}
+.card-main .card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.card-main .card-tag{font-size:10px;padding:3px 10px;border-radius:20px;font-weight:500}
+.ct-purple{background:rgba(124,58,237,0.2);color:#a78bfa}
+.ct-orange{background:rgba(234,88,12,0.2);color:#fb923c}
+.ct-teal{background:rgba(13,148,136,0.2);color:#2dd4bf}
+.ct-pink{background:rgba(219,39,119,0.2);color:#f472b6}
+
+.card-stat{width:160px}
+.card-stat-1{top:20px;right:20px;animation:cardFloat 6s ease-in-out infinite}
+.card-stat-2{bottom:40px;left:10px;animation:cardFloat 6s ease-in-out infinite 2s}
+.card-stat-3{top:40px;left:10px;animation:cardFloat 6s ease-in-out infinite 4s}
+.card-stat .stat-icon{font-size:24px;margin-bottom:8px}
+.card-stat .stat-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:white}
+.card-stat .stat-lbl{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px}
+
+@keyframes cardFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+/* ── MARQUEE ── */
+.marquee-section{padding:20px 0;background:rgba(124,58,237,0.08);border-top:1px solid rgba(124,58,237,0.15);border-bottom:1px solid rgba(124,58,237,0.15);overflow:hidden}
+.marquee-track{display:flex;gap:0;animation:marquee 20s linear infinite;white-space:nowrap}
+.marquee-item{display:inline-flex;align-items:center;gap:8px;padding:0 32px;font-size:13px;font-weight:500;color:rgba(255,255,255,0.45)}
+.marquee-dot{color:var(--purple);font-size:16px}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTIONS ── */
+.section{padding:96px 48px;max-width:1160px;margin:0 auto}
+.section-full{padding:96px 48px}
+
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:16px}
+.eyebrow-dot{width:6px;height:6px;border-radius:50%}
+
+h2.section-title{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;line-height:1.1;letter-spacing:-1px;margin-bottom:12px;color:white}
+h2.section-title em{font-style:italic}
+.section-desc{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;font-weight:300;max-width:500px;margin-bottom:52px}
+
+/* ── ABOUT ── */
+.about-bg{background:rgba(255,255,255,0.02)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-text p{font-size:15px;line-height:1.85;color:rgba(255,255,255,0.65);margin-bottom:16px;font-weight:300}
+.about-text p strong{color:white;font-weight:600}
+.about-text p:last-child{margin-bottom:0}
+
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+.about-stat{padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);text-align:center}
+.about-stat-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;line-height:1;margin-bottom:4px}
+.about-stat-lbl{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.06em;text-transform:uppercase}
+
+.skills-grid{display:flex;flex-direction:column;gap:12px}
+.skill-item{display:flex;flex-direction:column;gap:6px}
+.skill-top{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:500;color:rgba(255,255,255,0.8)}
+.skill-pct{font-size:12px;color:rgba(255,255,255,0.4)}
+.skill-bar{height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden}
+.skill-fill{height:100%;border-radius:3px;transition:width 1s ease}
+
+/* ── PROJECTS ── */
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+
+.project-card{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);position:relative;transition:transform 0.3s,box-shadow 0.3s;cursor:pointer;text-decoration:none;display:block}
+.project-card:hover{transform:translateY(-6px)}
+.project-card.featured{grid-column:span 2}
+
+.pc-visual{height:240px;display:flex;align-items:center;justify-content:center;font-size:64px;position:relative;overflow:hidden}
+.project-card.featured .pc-visual{height:300px}
+.pc-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,0.8))}
+
+.pc-body{padding:24px;background:rgba(255,255,255,0.03)}
+.pc-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+.pc-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:white;margin-bottom:8px;line-height:1.2}
+.project-card.featured .pc-title{font-size:26px}
+.pc-desc{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:16px}
+.pc-footer{display:flex;justify-content:space-between;align-items:center}
+.pc-techs{display:flex;gap:6px;flex-wrap:wrap}
+.pc-tech{font-size:10px;padding:3px 9px;border-radius:20px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5)}
+.pc-link{font-size:12px;font-weight:500;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:4px;transition:color 0.2s}
+.project-card:hover .pc-link{color:white}
+
+/* project colors */
+.pv-purple{background:linear-gradient(135deg,#1e0a3c,#4c1d95)}
+.pv-orange{background:linear-gradient(135deg,#431407,#9a3412)}
+.pv-teal{background:linear-gradient(135deg,#042f2e,#115e59)}
+.pv-pink{background:linear-gradient(135deg,#500724,#9d174d)}
+.pt-purple{background:rgba(124,58,237,0.15);color:#a78bfa}
+.pt-orange{background:rgba(234,88,12,0.15);color:#fb923c}
+.pt-teal{background:rgba(13,148,136,0.15);color:#2dd4bf}
+.pt-pink{background:rgba(219,39,119,0.15);color:#f472b6}
+
+/* ── EXPERIENCE ── */
+.exp-bg{background:rgba(255,255,255,0.015)}
+.timeline{display:flex;flex-direction:column;gap:0;max-width:720px}
+.timeline-item{display:grid;grid-template-columns:140px 1fr;gap:32px;position:relative;padding-bottom:40px}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-item::before{content:'';position:absolute;left:139px;top:8px;bottom:0;width:1px;background:rgba(255,255,255,0.08)}
+.timeline-item:last-child::before{display:none}
+.timeline-date{font-size:12px;color:rgba(255,255,255,0.35);font-weight:500;padding-top:4px;text-align:right}
+.timeline-dot{width:10px;height:10px;border-radius:50%;position:absolute;left:135px;top:6px;border:2px solid var(--black)}
+.timeline-content{}
+.timeline-role{font-size:16px;font-weight:600;color:white;margin-bottom:3px}
+.timeline-org{font-size:13px;font-weight:500;margin-bottom:8px}
+.timeline-desc{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.65}
+
+/* ── SERVICES ── */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.service-card{padding:28px 24px;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);transition:transform 0.2s,border-color 0.2s,background 0.2s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity 0.3s}
+.service-card:hover{transform:translateY(-4px)}
+.service-card:hover::before{opacity:1}
+.sc-purple::before{background:linear-gradient(135deg,rgba(124,58,237,0.08),transparent)}
+.sc-orange::before{background:linear-gradient(135deg,rgba(234,88,12,0.08),transparent)}
+.sc-teal::before{background:linear-gradient(135deg,rgba(13,148,136,0.08),transparent)}
+.sc-pink::before{background:linear-gradient(135deg,rgba(219,39,119,0.08),transparent)}
+.sc-yellow::before{background:linear-gradient(135deg,rgba(217,119,6,0.08),transparent)}
+.sc-blue::before{background:linear-gradient(135deg,rgba(37,99,235,0.08),transparent)}
+.service-card:hover{border-color:rgba(255,255,255,0.15)}
+.service-icon{font-size:32px;margin-bottom:16px;position:relative;z-index:1}
+.service-card h3{font-size:16px;font-weight:600;color:white;margin-bottom:8px;position:relative;z-index:1}
+.service-card p{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;position:relative;z-index:1}
+
+/* ── CRITIQU PROMO ── */
+.critiqu-section{background:linear-gradient(135deg,rgba(234,88,12,0.08),rgba(124,58,237,0.08));border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)}
+.critiqu-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;max-width:1160px;margin:0 auto;padding:80px 48px}
+.critiqu-left h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;line-height:1.1;letter-spacing:-1px;color:white;margin-bottom:16px}
+.critiqu-left p{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.7;font-weight:300;margin-bottom:28px}
+.critiqu-card{background:rgba(11,9,7,0.8);border:1px solid rgba(212,82,28,0.2);border-radius:16px;overflow:hidden}
+.cc-top{background:#0b0907;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.cc-logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:white}
+.cc-logo span{color:#d4521c}
+.cc-badge{font-size:9px;background:#d4521c;color:white;padding:3px 10px;border-radius:20px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600}
+.cc-body{padding:16px 20px}
+.cc-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.cc-lbl{font-size:11px;color:rgba(255,255,255,0.4);width:80px}
+.cc-track{flex:1;height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden}
+.cc-fill{height:100%;border-radius:3px;background:#d4521c}
+.cc-fix{display:flex;gap:8px;padding:8px 10px;background:rgba(212,82,28,0.08);border-left:2px solid #d4521c;border-radius:0 4px 4px 0;margin-top:10px}
+.cc-fix-n{font-family:'Playfair Display',serif;font-size:14px;font-weight:900;color:#d4521c;flex-shrink:0}
+.cc-fix-t{font-size:11px;color:rgba(255,255,255,0.55);line-height:1.4}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.contact-info{}
+.contact-info h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;line-height:1.1;letter-spacing:-1px;color:white;margin-bottom:14px}
+.contact-info p{font-size:15px;color:rgba(255,255,255,0.45);line-height:1.7;font-weight:300;margin-bottom:32px}
+.contact-links{display:flex;flex-direction:column;gap:12px}
+.contact-link{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);text-decoration:none;transition:background 0.2s,border-color 0.2s,transform 0.2s}
+.contact-link:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);transform:translateX(4px)}
+.cl-icon{font-size:18px;width:36px;text-align:center}
+.cl-text{}
+.cl-label{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1px}
+.cl-value{font-size:13px;font-weight:500;color:rgba(255,255,255,0.8)}
+
+/* CONTACT FORM */
+.contact-form{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:32px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-field{margin-bottom:14px}
+.form-field label{display:block;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:6px}
+.form-field input,.form-field textarea,.form-field select{width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.08);border-radius:8px;color:white;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;resize:none}
+.form-field input::placeholder,.form-field textarea::placeholder{color:rgba(255,255,255,0.2)}
+.form-field input:focus,.form-field textarea:focus,.form-field select:focus{border-color:var(--purple)}
+.form-field textarea{height:120px}
+.form-field select{color:rgba(255,255,255,0.6);cursor:pointer;appearance:none}
+.form-field select option{background:#1a1a1a;color:white}
+.form-submit{width:100%;padding:14px;background:linear-gradient(135deg,var(--purple),var(--pink));color:white;border:none;border-radius:50px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(124,58,237,0.3)}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,58,237,0.4)}
+.form-success{display:none;text-align:center;padding:24px;color:white}
+.form-success-icon{font-size:40px;margin-bottom:12px}
+.form-success h3{font-size:18px;font-weight:700;margin-bottom:6px}
+.form-success p{font-size:13px;color:rgba(255,255,255,0.45)}
+
+/* ── FOOTER ── */
+footer{padding:32px 48px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-logo{font-family:'Playfair Display',serif;font-size:16px;font-weight:900;color:white;text-decoration:none}
+.footer-logo span{color:var(--purple)}
+footer p{font-size:12px;color:rgba(255,255,255,0.25)}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:13px;text-decoration:none;color:rgba(255,255,255,0.5);transition:all 0.2s}
+.footer-social a:hover{background:rgba(124,58,237,0.2);border-color:var(--purple);color:white}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:14px 20px}
+  .nav-links a:not(.nav-cta){display:none}
+  .hero{padding:100px 20px 60px}
+  .hero-content{grid-template-columns:1fr;gap:48px}
+  .hero-right{height:320px}
+  .section,.section-full{padding:64px 20px}
+  .about-grid,.contact-grid,.critiqu-inner{grid-template-columns:1fr;gap:40px}
+  .projects-grid{grid-template-columns:1fr}
+  .project-card.featured{grid-column:span 1}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .timeline-item{grid-template-columns:100px 1fr;gap:16px}
+  .timeline-item::before{left:99px}
+  .timeline-dot{left:95px}
+  footer{padding:20px;flex-direction:column;align-items:flex-start}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursor-dot"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">R<span>.</span>Raval</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="nav-cta">Hire me →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-tag"><span class="hero-tag-dot"></span> Open to opportunities</div>
+      <h1 class="hero-title">
+        <span class="line-1">Design.</span>
+        <span class="line-2">Build.</span>
+        <span class="line-3">Launch.</span>
+      </h1>
+      <p class="hero-desc">I'm <strong style="color:white;font-weight:600">Rudra Pranav Raval</strong> — a designer, builder, and entrepreneur studying at Seneca@York. I create brands, build digital products, and turn ideas into things people actually use.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">View my work →</a>
+        <a href="#contact" class="btn-secondary">Get in touch</a>
+      </div>
+      <div class="hero-social">
+        <span class="hero-social-label">Follow</span>
+        <a href="https://www.linkedin.com/in/ravalrudra/" target="_blank" class="social-icon" title="LinkedIn">in</a>
+        <a href="https://www.instagram.com/rudr.4vr/" target="_blank" class="social-icon" title="Instagram">📸</a>
+        <a href="https://www.facebook.com/rudra.raval.1004" target="_blank" class="social-icon" title="Facebook">f</a>
+        <a href="https://github.com/rudra4vr" target="_blank" class="social-icon" title="GitHub">⌥</a>
+        <a href="https://www.threads.com/@rudr.4vr" target="_blank" class="social-icon" title="Threads">@</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="floating-card card-main">
+        <div class="card-avatar">R</div>
+        <div class="card-name">Rudra Pranav Raval</div>
+        <div class="card-role">Designer · Builder · Entrepreneur</div>
+        <div class="card-tags">
+          <span class="card-tag ct-purple">UI/UX Design</span>
+          <span class="card-tag ct-orange">Branding</span>
+          <span class="card-tag ct-teal">SaaS</span>
+          <span class="card-tag ct-pink">Strategy</span>
+        </div>
+      </div>
+      <div class="floating-card card-stat card-stat-1">
+        <div class="stat-icon">🚀</div>
+        <div class="stat-val">1+</div>
+        <div class="stat-lbl">Products Launched</div>
+      </div>
+      <div class="floating-card card-stat card-stat-2">
+        <div class="stat-icon">🎨</div>
+        <div class="stat-val">∞</div>
+        <div class="stat-lbl">Ideas. Zero limits.</div>
+      </div>
+      <div class="floating-card card-stat card-stat-3">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-val">60s</div>
+        <div class="stat-lbl">To ship something</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot">✦</span> UI/UX Design</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> Brand Identity</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> Product Strategy</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> Web Development</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> Entrepreneurship</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> Figma & Adobe</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> SaaS Building</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> Creative Direction</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> UI/UX Design</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> Brand Identity</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> Product Strategy</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> Web Development</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> Entrepreneurship</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> Figma & Adobe</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> SaaS Building</span>
+    <span class="marquee-item"><span class="marquee-dot">✦</span> Creative Direction</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section-full about-bg" id="about">
+  <div class="section" style="padding-top:0;padding-bottom:0">
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <div class="eyebrow" style="color:#a78bfa"><span class="eyebrow-dot" style="background:#a78bfa"></span>About me</div>
+        <h2 class="section-title">Designing the future,<br><em>one pixel at a time.</em></h2>
+        <p>I'm a <strong>design student at Seneca@York</strong> with an entrepreneurial mindset. I don't just design things — I build them, launch them, and iterate until they work.</p>
+        <p>My approach combines <strong>sharp visual thinking</strong> with <strong>strategic business sense.</strong> Every pixel I place has a purpose. Every product I build solves a real problem.</p>
+        <p>I recently built and launched <strong>Critiqu</strong> — an AI-powered design critique tool — from scratch. That's how I work: idea to live product, fast.</p>
+        <div class="about-stats">
+          <div class="about-stat">
+            <div class="about-stat-num" style="color:#a78bfa">100%</div>
+            <div class="about-stat-lbl">Self-taught builder</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num" style="color:#fb923c">1</div>
+            <div class="about-stat-lbl">Live SaaS product</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num" style="color:#2dd4bf">∞</div>
+            <div class="about-stat-lbl">Curiosity level</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-num" style="color:#f472b6">24/7</div>
+            <div class="about-stat-lbl">Building mode</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow" style="color:#2dd4bf;margin-bottom:24px"><span class="eyebrow-dot" style="background:#2dd4bf"></span>Skills & tools</div>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <div class="skill-top"><span>UI/UX Design</span><span class="skill-pct">90%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:90%;background:linear-gradient(90deg,#7c3aed,#a78bfa)"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-top"><span>Brand Identity</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:85%;background:linear-gradient(90deg,#db2777,#f472b6)"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-top"><span>Figma & Adobe Suite</span><span class="skill-pct">88%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:88%;background:linear-gradient(90deg,#0d9488,#2dd4bf)"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-top"><span>HTML/CSS/JavaScript</span><span class="skill-pct">70%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:70%;background:linear-gradient(90deg,#ea580c,#fb923c)"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-top"><span>Product Strategy</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:80%;background:linear-gradient(90deg,#d97706,#fbbf24)"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-top"><span>Business & Entrepreneurship</span><span class="skill-pct">82%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:82%;background:linear-gradient(90deg,#2563eb,#60a5fa)"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="eyebrow reveal" style="color:#fb923c"><span class="eyebrow-dot" style="background:#fb923c"></span>Selected work</div>
+  <h2 class="section-title reveal">Things I've <em>built.</em></h2>
+  <p class="section-desc reveal">Real projects. Real problems solved. From concept to launch.</p>
+
+  <div class="projects-grid">
+    <!-- FEATURED: CRITIQU -->
+    <a href="https://critiqu.netlify.app" target="_blank" class="project-card featured" style="border-color:rgba(212,82,28,0.2)">
+      <div class="pc-visual pv-orange">
+        <span style="font-size:80px;z-index:1;position:relative">⚡</span>
+        <div class="pc-overlay"></div>
+      </div>
+      <div class="pc-body" style="background:rgba(212,82,28,0.06)">
+        <span class="pc-tag pt-orange">🔥 Live Product</span>
+        <div class="pc-title">Critiqu — AI Design Critique Tool</div>
+        <div class="pc-desc">Built and launched a fully automated SaaS product from scratch. Users upload their logo, website, or brand and receive a detailed AI-powered design critique in 60 seconds. Complete with Stripe payments, Google Apps Script automation, and Gemini AI integration.</div>
+        <div class="pc-footer">
+          <div class="pc-techs">
+            <span class="pc-tech">HTML/CSS</span>
+            <span class="pc-tech">Google Apps Script</span>
+            <span class="pc-tech">Gemini AI</span>
+            <span class="pc-tech">Stripe</span>
+            <span class="pc-tech">Netlify</span>
+          </div>
+          <span class="pc-link">Visit live site →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- PROJECT 2 -->
+    <div class="project-card">
+      <div class="pc-visual pv-purple">
+        <span style="font-size:64px;z-index:1;position:relative">🎨</span>
+        <div class="pc-overlay"></div>
+      </div>
+      <div class="pc-body">
+        <span class="pc-tag pt-purple">Brand Design</span>
+        <div class="pc-title">Brand Identity Systems</div>
+        <div class="pc-desc">Designing cohesive brand identities for startups and small businesses — logo systems, colour palettes, typography, and brand guidelines.</div>
+        <div class="pc-footer">
+          <div class="pc-techs">
+            <span class="pc-tech">Figma</span>
+            <span class="pc-tech">Adobe Illustrator</span>
+            <span class="pc-tech">Canva</span>
+          </div>
+          <span class="pc-link">View work →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="project-card">
+      <div class="pc-visual pv-teal">
+        <span style="font-size:64px;z-index:1;position:relative">💻</span>
+        <div class="pc-overlay"></div>
+      </div>
+      <div class="pc-body">
+        <span class="pc-tag pt-teal">UI/UX Design</span>
+        <div class="pc-title">Digital Product Design</div>
+        <div class="pc-desc">Designing user interfaces and experiences for web and mobile — from wireframes to polished high-fidelity prototypes ready for development.</div>
+        <div class="pc-footer">
+          <div class="pc-techs">
+            <span class="pc-tech">Figma</span>
+            <span class="pc-tech">Prototyping</span>
+            <span class="pc-tech">User Research</span>
+          </div>
+          <span class="pc-link">View work →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 4 -->
+    <div class="project-card">
+      <div class="pc-visual pv-pink">
+        <span style="font-size:64px;z-index:1;position:relative">📊</span>
+        <div class="pc-overlay"></div>
+      </div>
+      <div class="pc-body">
+        <span class="pc-tag pt-pink">Strategy</span>
+        <div class="pc-title">Business & Product Strategy</div>
+        <div class="pc-desc">Developing go-to-market strategies, product positioning, and business models for early-stage digital products and startups.</div>
+        <div class="pc-footer">
+          <div class="pc-techs">
+            <span class="pc-tech">Market Research</span>
+            <span class="pc-tech">Positioning</span>
+            <span class="pc-tech">GTM</span>
+          </div>
+          <span class="pc-link">Learn more →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section-full exp-bg" id="experience">
+  <div class="section" style="padding-top:0;padding-bottom:0">
+    <div class="eyebrow reveal" style="color:#2dd4bf"><span class="eyebrow-dot" style="background:#2dd4bf"></span>Experience</div>
+    <h2 class="section-title reveal">Where I've <em>been.</em></h2>
+    <p class="section-desc reveal">Education, projects, and everything I've built along the way.</p>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-date">2024 — Now</div>
+        <div class="timeline-dot" style="background:#a78bfa;border-color:#0a0a0a"></div>
+        <div class="timeline-content">
+          <div class="timeline-role">Design & Technology Student</div>
+          <div class="timeline-org" style="color:#a78bfa">Seneca Polytechnic @ York University</div>
+          <div class="timeline-desc">Studying design principles, digital media, and technology. Combining academic learning with real-world product building and entrepreneurship.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2025 — Now</div>
+        <div class="timeline-dot" style="background:#fb923c;border-color:#0a0a0a"></div>
+        <div class="timeline-content">
+          <div class="timeline-role">Founder</div>
+          <div class="timeline-org" style="color:#fb923c">Critiqu</div>
+          <div class="timeline-desc">Built and launched an AI-powered design critique SaaS from zero — product, brand, website, automation, and payment system. Currently growing the user base and iterating on feedback.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2024 — Now</div>
+        <div class="timeline-dot" style="background:#2dd4bf;border-color:#0a0a0a"></div>
+        <div class="timeline-content">
+          <div class="timeline-role">Freelance Designer</div>
+          <div class="timeline-org" style="color:#2dd4bf">Independent</div>
+          <div class="timeline-desc">Working with clients on brand identities, UI/UX design, and digital products. Helping small businesses and startups look and communicate better.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="eyebrow reveal" style="color:#f472b6"><span class="eyebrow-dot" style="background:#f472b6"></span>What I do</div>
+  <h2 class="section-title reveal">Services I <em>offer.</em></h2>
+  <p class="section-desc reveal">From brand identity to full product launches — here's how I can help you.</p>
+  <div class="services-grid reveal">
+    <div class="service-card sc-purple">
+      <div class="service-icon">🎨</div>
+      <h3>Brand Identity Design</h3>
+      <p>Logo systems, colour palettes, typography, and complete brand guidelines that make your business look unforgettable.</p>
+    </div>
+    <div class="service-card sc-teal">
+      <div class="service-icon">💻</div>
+      <h3>UI/UX Design</h3>
+      <p>User interfaces and experiences for web and mobile — wireframes, prototypes, and pixel-perfect designs ready for dev.</p>
+    </div>
+    <div class="service-card sc-orange">
+      <div class="service-icon">🌐</div>
+      <h3>Website Design & Build</h3>
+      <p>Beautiful, fast websites built in HTML/CSS or no-code tools. From landing pages to full multi-page sites.</p>
+    </div>
+    <div class="service-card sc-pink">
+      <div class="service-icon">📱</div>
+      <h3>Social Media Design</h3>
+      <p>On-brand graphics, templates, and visual systems for Instagram, LinkedIn, and beyond. Consistent. Scroll-stopping.</p>
+    </div>
+    <div class="service-card sc-yellow">
+      <div class="service-icon">🚀</div>
+      <h3>Product Strategy</h3>
+      <p>Go-to-market strategy, product positioning, and business model design for early-stage digital products.</p>
+    </div>
+    <div class="service-card sc-blue">
+      <div class="service-icon">⚡</div>
+      <h3>Design Critique</h3>
+      <p>Honest, specific feedback on your logo, website, or brand. Know exactly what to fix — and why. Powered by Critiqu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CRITIQU PROMO -->
+<div class="critiqu-section">
+  <div class="critiqu-inner reveal">
+    <div class="critiqu-left">
+      <div class="eyebrow" style="color:#fb923c"><span class="eyebrow-dot" style="background:#fb923c"></span>My latest product</div>
+      <h2>I built an AI that critiques design.<br><em style="font-style:italic;color:#d4521c">Honestly.</em></h2>
+      <p>Critiqu analyses your logo, website, or brand and delivers a detailed professional-grade critique in 60 seconds. Built entirely by me — design, code, AI integration, payments, everything.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="https://critiqu.netlify.app" target="_blank" class="btn-primary" style="background:linear-gradient(135deg,#ea580c,#d4521c)">Try Critiqu free →</a>
+        <a href="https://critiqu.netlify.app/#pricing" target="_blank" class="btn-secondary">See pricing</a>
+      </div>
+    </div>
+    <div class="critiqu-card">
+      <div class="cc-top">
+        <div class="cc-logo">Critiqu<span>.</span></div>
+        <div class="cc-badge">Live Product</div>
+      </div>
+      <div class="cc-body">
+        <div style="font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px">Design Score</div>
+        <div class="cc-row"><div class="cc-lbl">Typography</div><div class="cc-track"><div class="cc-fill" style="width:65%"></div></div><div style="font-size:11px;color:rgba(255,255,255,0.4);width:28px;text-align:right">6/10</div></div>
+        <div class="cc-row"><div class="cc-lbl">Colour</div><div class="cc-track"><div class="cc-fill" style="width:80%"></div></div><div style="font-size:11px;color:rgba(255,255,255,0.4);width:28px;text-align:right">8/10</div></div>
+        <div class="cc-row"><div class="cc-lbl">Layout</div><div class="cc-track"><div class="cc-fill" style="width:70%"></div></div><div style="font-size:11px;color:rgba(255,255,255,0.4);width:28px;text-align:right">7/10</div></div>
+        <div class="cc-fix"><div class="cc-fix-n">1</div><div class="cc-fix-t"><strong style="color:white">Tighten the kerning</strong> between "A" and "V" — reads as two words at small sizes.</div></div>
+        <div class="cc-fix"><div class="cc-fix-n">2</div><div class="cc-fix-t"><strong style="color:white">Replace gradient</strong> with flat colour — won't reproduce in single-colour print.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="contact-grid reveal">
+    <div class="contact-info">
+      <div class="eyebrow" style="color:#a78bfa"><span class="eyebrow-dot" style="background:#a78bfa"></span>Get in touch</div>
+      <h2 class="section-title">Let's build something<br><em>together.</em></h2>
+      <p>Whether you need a brand, a website, a product, or just an honest design opinion — I'm available. Let's talk.</p>
+      <div class="contact-links">
+        <a href="mailto:ravalrudrap@gmail.com" class="contact-link">
+          <span class="cl-icon">📧</span>
+          <div class="cl-text"><div class="cl-label">Email</div><div class="cl-value">ravalrudrap@gmail.com</div></div>
+        </a>
+        <a href="https://www.linkedin.com/in/ravalrudra/" target="_blank" class="contact-link">
+          <span class="cl-icon">💼</span>
+          <div class="cl-text"><div class="cl-label">LinkedIn</div><div class="cl-value">linkedin.com/in/ravalrudra</div></div>
+        </a>
+        <a href="https://www.instagram.com/rudr.4vr/" target="_blank" class="contact-link">
+          <span class="cl-icon">📸</span>
+          <div class="cl-text"><div class="cl-label">Instagram</div><div class="cl-value">@rudr.4vr</div></div>
+        </a>
+        <a href="https://github.com/rudra4vr" target="_blank" class="contact-link">
+          <span class="cl-icon">⌥</span>
+          <div class="cl-text"><div class="cl-label">GitHub</div><div class="cl-value">github.com/rudra4vr</div></div>
+        </a>
+        <a href="https://www.threads.com/@rudr.4vr" target="_blank" class="contact-link">
+          <span class="cl-icon">@</span>
+          <div class="cl-text"><div class="cl-label">Threads</div><div class="cl-value">@rudr.4vr</div></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div id="contact-form-wrap">
+        <form id="contact-form">
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+          <input type="hidden" name="subject" value="New message from rudraraval.com portfolio">
+          <input type="checkbox" name="botcheck" style="display:none">
+          <div class="form-row">
+            <div class="form-field">
+              <label>Your name</label>
+              <input type="text" name="name" placeholder="Jane Smith" required>
+            </div>
+            <div class="form-field">
+              <label>Your email</label>
+              <input type="email" name="email" placeholder="jane@company.com" required>
+            </div>
+          </div>
+          <div class="form-field">
+            <label>What do you need?</label>
+            <select name="service" required>
+              <option value="" disabled selected>Select a service</option>
+              <option>Brand Identity Design</option>
+              <option>UI/UX Design</option>
+              <option>Website Design & Build</option>
+              <option>Social Media Design</option>
+              <option>Product Strategy</option>
+              <option>Design Critique (Critiqu)</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Tell me about your project</label>
+            <textarea name="message" placeholder="Brief description of what you're working on and what you need help with..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send message →</button>
+        </form>
+      </div>
+      <div class="form-success" id="form-success">
+        <div class="form-success-icon">✦</div>
+        <h3>Message sent!</h3>
+        <p>Thanks for reaching out. I'll get back to you within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">R<span>.</span>Raval</a>
+  <p>© 2026 Rudra Pranav Raval · Designed & built by me.</p>
+  <div class="footer-social">
+    <a href="https://www.linkedin.com/in/ravalrudra/" target="_blank" title="LinkedIn">in</a>
+    <a href="https://www.instagram.com/rudr.4vr/" target="_blank" title="Instagram">📸</a>
+    <a href="https://www.facebook.com/rudra.raval.1004" target="_blank" title="Facebook">f</a>
+    <a href="https://github.com/rudra4vr" target="_blank" title="GitHub">⌥</a>
+    <a href="https://www.threads.com/@rudr.4vr" target="_blank" title="Threads">@</a>
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const dot = document.getElementById('cursor-dot');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  dot.style.left = e.clientX + 'px';
+  dot.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,.project-card,.service-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1.8)';
+    cursor.style.borderColor = '#f472b6';
+    dot.style.background = '#f472b6';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    cursor.style.borderColor = '#7c3aed';
+    dot.style.background = '#7c3aed';
+  });
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Contact form
+const form = document.getElementById('contact-form');
+if(form) {
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    btn.textContent = 'Sending...'; btn.disabled = true;
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST', body: new FormData(form)
+      });
+      const data = await res.json();
+      if(data.success) {
+        document.getElementById('contact-form-wrap').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else { btn.textContent = 'Send message →'; btn.disabled = false; }
+    } catch(err) { btn.textContent = 'Send message →'; btn.disabled = false; }
+  });
+}
+
+// Smooth active nav
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if(window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.style.color = a.getAttribute('href') === '#'+current ? 'white' : '';
+  });
+});
+</script>
+</body>
+</html>
